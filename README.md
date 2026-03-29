@@ -1,3 +1,6 @@
+# Canlı Link
+https://web-projesi-2026.github.io/emirhanicer_website/
+
 # 🎮 Oyun Geliştirici Portfolyosu
 
 Modern, karanlık temalı (dark-theme) ve tamamen saf (pure) HTML, CSS ve JavaScript kullanılarak geliştirilmiş kişisel oyun geliştirici portfolyo web sitesi. Oyun projelerinizi, yeteneklerinizi ve kendinizi tanıtmak için tasarlanmış minimalist ve hızlı bir şablondur.
