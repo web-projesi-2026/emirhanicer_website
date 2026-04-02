@@ -89,7 +89,6 @@ Ancak süreç sadece üretmek değil, **anlamak ve geliştirmek** üzerine kurul
     ├── contact.html
     ├── project.html
     └── game1.html
-```
 
 ---
 
