@@ -285,11 +285,63 @@ textarea.form-control {
   min-height: 150px;
 }
 
-/* Responsive */
+/* --- Hamburger Menu İkonu Stilleri --- */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 101;
+  /* Menünün üstünde durması için */
+}
+
+.hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-primary);
+  transition: var(--transition);
+  border-radius: 3px;
+}
+
+/* Responsive / Mobil Tasarım */
 @media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
   .nav-links {
-    display: none;
-    /* In a full app, this would be a hamburger menu */
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* Başlangıçta ekranın sağında, görünmez */
+    width: 250px;
+    height: 100vh;
+    background-color: var(--bg-nav);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s ease-in-out;
+    border-left: 1px solid var(--card-bg-2);
+    z-index: 100;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-links.active {
+    right: 0;
+    /* Butona basılınca sağdan içeri kayar */
+  }
+
+  /* Hamburger İkonunun Çarpı (X) Olma Animasyonu */
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   h1 {
