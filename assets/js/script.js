@@ -48,3 +48,64 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// Image Slider (Resim Kaydırıcı) Mantığı
+document.addEventListener('DOMContentLoaded', () => {
+  // Sitedeki tüm slider'ları bul (birden fazla sayfa için uyumlu)
+  const sliders = document.querySelectorAll('.slider-container');
+
+  sliders.forEach(slider => {
+    let currentSlide = 0; // Hangi resimde olduğumuzu tutan değişken
+    const slides = slider.querySelectorAll('.slide');
+    const prevBtn = slider.querySelector('.prev-btn');
+    const nextBtn = slider.querySelector('.next-btn');
+
+    // Eğer slider içinde resim varsa işlemleri yap
+    if (slides.length > 0) {
+
+      // Slayt değiştirme fonksiyonu
+      const changeSlide = (direction) => {
+        // Önce şu anki resmi gizle
+        slides[currentSlide].classList.remove('active');
+
+        // Yeni resmin indeksini hesapla (Sona gelince başa dönmesi için matematiksel bir hile)
+        currentSlide = (currentSlide + direction + slides.length) % slides.length;
+
+        // Yeni resmi göster
+        slides[currentSlide].classList.add('active');
+      };
+
+      // Butonlara tıklanma olaylarını dinle
+      if (prevBtn) prevBtn.addEventListener('click', () => changeSlide(-1));
+      if (nextBtn) nextBtn.addEventListener('click', () => changeSlide(1));
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.body;
+  const btnDefault = document.getElementById('set-default');
+  const btnSpace = document.getElementById('set-space');
+
+  // 1. Sayfa yüklendiğinde hafızadaki temayı kontrol et
+  const savedTheme = localStorage.getItem('selectedTheme');
+  if (savedTheme === 'space') {
+    body.classList.add('theme-space');
+  }
+
+  // 2. Varsayılan Temaya Geçiş
+  if (btnDefault) {
+    btnDefault.addEventListener('click', () => {
+      body.classList.remove('theme-space');
+      localStorage.setItem('selectedTheme', 'default');
+    });
+  }
+
+  // 3. Uzay Temasına Geçiş
+  if (btnSpace) {
+    btnSpace.addEventListener('click', () => {
+      body.classList.add('theme-space');
+      localStorage.setItem('selectedTheme', 'space');
+    });
+  }
+});
