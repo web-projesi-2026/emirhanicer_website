@@ -109,3 +109,90 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// --- JSON'dan Veri Çekme ve Favorilere Ekleme (Ödev Görevi) ---
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('dynamic-games-container');
+
+  // Eğer bu sayfada 'dynamic-games-container' yoksa (örneğin about sayfasındaysak) kodu çalıştırma
+  if (!container) return;
+
+  // 1. LocalStorage'dan mevcut favorileri al (Yoksa boş dizi oluştur)
+  let favorites = JSON.parse(localStorage.getItem('favoriteGames')) || [];
+
+  // 2. Fetch API ile JSON verisini çek
+  // NOT: Dosya yolunu games.json'ı nereye koyduysan ona göre ayarla (şu an assets/data/games.json arıyor)
+  fetch('assets/data/games.json')
+    .then(response => response.json())
+    .then(games => {
+      // Kutunun içini temizle (Yükleniyor vs yazısı koyduysak gitsin)
+      container.innerHTML = '';
+
+      // 3. Her bir oyun için kart HTML'i oluştur (Dinamik Render)
+      games.forEach(game => {
+        // Bu oyun daha önce favorilere eklenmiş mi kontrol et
+        const isFavorited = favorites.includes(game.id);
+        const heartClass = isFavorited ? 'fav-btn favorited' : 'fav-btn';
+        const heartIcon = isFavorited ? '♥' : '♡'; // Dolu kalp veya boş kalp
+
+        // Kart HTML'ini oluştur
+        const cardHTML = `
+                    <div class="card" style="opacity: 0; transform: translateY(20px); transition: all 0.4s ease;">
+                        <div class="card-header">
+                            <div class="card-img-placeholder">
+                                <img src="${game.img}" alt="${game.title}">
+                            </div>
+                            <button class="${heartClass}" data-id="${game.id}" title="Favorilere Ekle/Çıkar">
+                                ${heartIcon}
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>${game.title}</h3>
+                            <p>${game.desc}</p>
+                            <a href="${game.link}" class="btn btn-secondary">Proje Detayları</a>
+                        </div>
+                    </div>
+                `;
+
+        // Kartı sayfaya ekle
+        container.innerHTML += cardHTML;
+      });
+
+      // Kartlar eklendikten sonra fade-in animasyonunu tetikle
+      setTimeout(() => {
+        const dynamicCards = container.querySelectorAll('.card');
+        dynamicCards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 100 * index);
+        });
+      }, 100);
+
+      // 4. Favori butonlarına tıklanma olayını (Event Listener) ekle
+      const favButtons = container.querySelectorAll('.fav-btn');
+      favButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const gameId = e.target.getAttribute('data-id');
+
+          // Eğer id favorilerde varsa çıkar, yoksa ekle (Toggle mantığı)
+          if (favorites.includes(gameId)) {
+            favorites = favorites.filter(id => id !== gameId); // Çıkar
+            e.target.classList.remove('favorited');
+            e.target.innerText = '♡';
+          } else {
+            favorites.push(gameId); // Ekle
+            e.target.classList.add('favorited');
+            e.target.innerText = '♥';
+          }
+
+          // Güncel favori listesini LocalStorage'a geri kaydet
+          localStorage.setItem('favoriteGames', JSON.stringify(favorites));
+        });
+      });
+    })
+    .catch(error => {
+      console.error("Veri çekilirken hata oluştu:", error);
+      container.innerHTML = '<p style="color: red;">Oyun verileri yüklenemedi. Lütfen bir yerel sunucu (Live Server) kullandığınızdan emin olun.</p>';
+    });
+});

@@ -1,0 +1,16 @@
+[
+    {
+        "id": "game_roadrage",
+        "title": "Road Rage",
+        "desc": "Road Rage, hazır 3D varlıklar kullanılarak geliştirdiğim bir oyun olup, Traffic Racer tarzında bir deneyim sunmaktadır. İlk 3D oyunum olmasına rağmen, üzerinde hala çalışıyorum.",
+        "img": "assets/images/CyberDriveRage.png",
+        "link": "pages/gamepages/RoadRagePage.html"
+    },
+    {
+        "id": "game_mexplat2",
+        "title": "Mex Platform 2",
+        "desc": "Geçmişteki oyunları inceleyerek Mex Platform 1'i tekrar hatırladım ve ardından 2. versiyonunu oluşturmaya karar verdim. Kendi tasarladığım 2D varlıklar ile geliştirilmiştir.",
+        "img": "assets/images/mexplatform2.png",
+        "link": "pages/gamepages/MexPlatformPage.html"
+    }
+]
