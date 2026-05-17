@@ -23,11 +23,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        snapshot.forEach((doc) => {
+snapshot.forEach((doc) => {
             const game = doc.data();
-            // Bu oyun kullanıcının favorilerinde var mı kontrol et
+            
+            // --- YOL DÜZELTME SİHRİ BURADA ---
+            // Veritabanındaki "../" kısmını sadece ana sayfa için siliyoruz
+            let imgPath = game.img;
+            if (imgPath && imgPath.startsWith('../')) {
+                imgPath = imgPath.replace('../', ''); 
+                // Artık "../assets/..." yerine "assets/..." olacak ve ana sayfada kusursuz çalışacak!
+            }
+
             const isFav = favorites.includes(game.id);
-            // Kalp ikonunun rengi (Favoriyse kırmızı, değilse gri)
             const heartColor = isFav ? '#ef4444' : '#6b7280';
 
             const cardHTML = `
@@ -39,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </button>
 
                     <div class="card-img-placeholder">
-                        <img src="${game.img}" alt="${game.title}">
+                        <img src="${imgPath}" alt="${game.title}">
                     </div>
                     <div class="card-content">
                         <span class="tech-tag" style="background-color: var(--accent-primary); color: #fff; margin-bottom: 10px; display: inline-block;">${(game.category || 'Diğer').toUpperCase()}</span>
