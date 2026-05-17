@@ -12,5 +12,12 @@
         "desc": "Geçmişteki oyunları inceleyerek Mex Platform 1'i tekrar hatırladım ve ardından 2. versiyonunu oluşturmaya karar verdim. Kendi tasarladığım 2D varlıklar ile geliştirilmiştir.",
         "img": "assets/images/mexplatform2.png",
         "link": "pages/gamepages/MexPlatformPage.html"
+    },
+    {
+        "id": "game_mexplat2",
+        "title": "Mex Platform 2",
+        "desc": "Geçmişteki oyunları inceleyerek Mex Platform 1'i tekrar hatırladım ve ardından 2. versiyonunu oluşturmaya karar verdim. Kendi tasarladığım 2D varlıklar ile geliştirilmiştir.",
+        "img": "assets/images/mexplatform2.png",
+        "link": "pages/gamepages/MexPlatformPage.html"
     }
 ]
