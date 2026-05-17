@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gizli Yönetim Paneli</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg">
+    <style>
+        /* Admin paneline özel basit ve şık kutu tasarımı */
+        .admin-box {
+            max-width: 500px;
+            margin: 80px auto;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="admin-box" id="loginSection">
+            <h2 style="text-align: center; color: var(--accent-primary);">Yetkili Girişi</h2>
+            <input type="email" id="adminEmail" class="form-control search-input"
+                style="width: 100%; margin-bottom: 15px;" placeholder="E-posta">
+            <input type="password" id="adminPassword" class="form-control search-input"
+                style="width: 100%; margin-bottom: 15px;" placeholder="Şifre">
+            <button id="loginBtn" class="btn btn-primary" style="width: 100%;">Sisteme Giriş Yap</button>
+            <p id="loginError" style="color: #ef4444; text-align: center; margin-top: 15px; font-weight: bold;"></p>
+        </div>
+
+        <div class="admin-box hidden" id="dashboardSection" style="max-width: 700px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 id="formTitle" style="color: var(--accent-primary); margin: 0;">Yeni Oyun Ekle</h2>
+                <button id="logoutBtn" class="btn btn-secondary">Çıkış Yap</button>
+            </div>
+
+            <input type="hidden" id="editingDocId" value="">
+
+            <input type="text" id="gameId" class="form-control search-input" style="width: 100%; margin-bottom: 15px;"
+                placeholder="Oyun ID (Örn: game_roadrage)">
+            <input type="text" id="gameTitle" class="form-control search-input"
+                style="width: 100%; margin-bottom: 15px;" placeholder="Oyun Adı (Örn: Road Rage)">
+
+            <select id="gameCategory" class="form-control search-input" style="width: 100%; margin-bottom: 15px;">
+                <option value="aksiyon">Aksiyon & FPS</option>
+                <option value="yarış">Yarış</option>
+                <option value="platform">Platform</option>
+            </select>
+
+            <textarea id="gameDesc" class="form-control search-input"
+                style="width: 100%; margin-bottom: 15px; border-radius: 15px;" rows="4"
+                placeholder="Oyun Açıklaması..."></textarea>
+
+
+
+            <label for="gameImg" style="color: var(--text-secondary); display: block; margin-bottom: 5px;">Oyun Kapak
+                Resmi:</label>
+            <input type="text" id="gameImg" class="form-control search-input" style="width: 100%; margin-bottom: 20px;"
+                value="../assets/images/">
+            <label for="gameLink" style="color: var(--text-secondary); display: block; margin-bottom: 5px;">Itch.io veya
+                Oynanış Linki (İsteğe Bağlı):</label>
+            <input type="text" id="gameLink" class="form-control search-input" style="width: 100%; margin-bottom: 20px;"
+                placeholder="Örn: https://mextrong.itch.io/oyun-adi">
+            <label
+                style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: var(--text-primary); cursor: pointer;">
+                <input type="checkbox" id="gameFeatured" style="width: 20px; height: 20px; cursor: pointer;">
+                Bu oyunu Ana Sayfa "Öne Çıkanlar" vitrininde göster
+            </label>
+
+            <button id="submitGameBtn" class="btn btn-primary" style="width: 100%;">Veritabanına Kaydet</button>
+            <button id="cancelEditBtn" class="btn btn-secondary hidden"
+                style="width: 100%; margin-top: 10px;">Düzenlemeyi İptal Et</button>
+            <p id="addMessage" style="text-align: center; margin-top: 15px; font-weight: bold;"></p>
+
+            <hr style="margin: 30px 0; border-color: var(--card-bg-2);">
+            <h3 style="color: var(--text-primary); text-align: center; margin-bottom: 15px;">Eklenmiş Oyunları Yönet
+            </h3>
+            <div id="adminGamesList" style="display: flex; flex-direction: column; gap: 10px;">
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="../assets/js/admin.js"></script>
+</body>
+
+</html>
