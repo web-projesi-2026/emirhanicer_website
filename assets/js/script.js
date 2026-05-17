@@ -196,3 +196,34 @@ document.addEventListener('DOMContentLoaded', () => {
       container.innerHTML = '<p style="color: red;">Oyun verileri yüklenemedi. Lütfen bir yerel sunucu (Live Server) kullandığınızdan emin olun.</p>';
     });
 });
+
+// --- GitHub API (Kısa ve Modern Versiyon) ---
+document.addEventListener('DOMContentLoaded', async () => {
+  const container = document.getElementById('github-repos-container');
+  if (!container) return;
+
+  try {
+    // fetch işlemini 'await' ile bekletip kod kalabalığından kurtuluyoruz
+    const res = await fetch('https://api.github.com/users/Mextrong/repos?sort=updated&per_page=3');
+    if (!res.ok) throw new Error();
+    const repos = await res.json();
+
+    // Döngü (forEach) yerine map() kullanarak tüm HTML'i tek seferde çiziyoruz
+    container.innerHTML = repos.length === 0 ? '<p>Proje bulunamadı.</p>' : repos.map(repo => `
+            <div class="card" style="padding: 25px; display: flex; flex-direction: column; gap: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="color: var(--accent-primary); margin: 0; font-size: 1.3rem;">${repo.name}</h3>
+                    ${repo.language ? `<span class="tech-tag">${repo.language}</span>` : ''}
+                </div>
+                <p style="font-size: 0.95rem; margin: 0;">${repo.description || "Açıklama bulunmuyor."}</p>
+                <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--card-bg-2); padding-top: 15px;">
+                    <span style="color: var(--text-secondary); font-size: 0.85rem;">⭐ ${repo.stargazers_count} Yıldız</span>
+                    <a href="${repo.html_url}" target="_blank" class="btn btn-secondary" style="padding: 5px 15px;">Kodu İncele ↗</a>
+                </div>
+            </div>
+        `).join(''); // Kartları birleştirip tek parça halinde HTML'e yollar
+
+  } catch {
+    container.innerHTML = '<p style="color: #ef4444; text-align: center;">GitHub verileri yüklenemedi.</p>';
+  }
+});

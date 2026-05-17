@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oyun Detayı - MexGames</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="nav-brand">MexGames<span>Portfolio</span></a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../index.html">Ana Sayfa</a></li>
+                <li><a href="project.html">Projeler</a></li>
+                <li><a href="about.html">Hakkımda</a></li>
+                <li><a href="contact.html">İletişim</a></li>
+            </ul>
+            <div class="theme-toggle-container">
+                <button class="theme-btn btn-default" id="set-default"></button>
+                <button class="theme-btn btn-space" id="set-space"></button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container" id="detail-container">
+
+            <div id="loading-message" style="text-align: center; margin: 50px 0;">
+                <h2 style="color: var(--accent-primary);">Oyun Verileri Buluttan Çekiliyor...</h2>
+            </div>
+
+            <div id="game-content"
+                style="display: none; max-width: 800px; margin: 0 auto; background-color: var(--card-bg-2); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+
+                <img id="detail-img" src="" alt="Oyun Resmi" style="width: 100%; height: 400px; object-fit: cover;">
+
+                <div style="padding: 40px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h1 id="detail-title" style="margin: 0; color: var(--accent-primary); font-size: 2.5rem;"></h1>
+                        <span id="detail-category" class="tech-tag"
+                            style="background-color: var(--accent-primary); color: #fff; font-size: 1rem; padding: 8px 15px;"></span>
+                    </div>
+
+                    <p id="detail-desc" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary);"></p>
+
+                    <div
+                        style="margin-top: 30px; text-align: center; display: flex; justify-content: center; gap: 15px;">
+                        <a id="detail-itch-link" href="#" target="_blank" class="btn btn-primary"
+                            style="display: none;">Oyunu İncele / Oyna</a>
+
+                        <a href="project.html" class="btn btn-secondary">Projelerime Geri Dön</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="../assets/js/script.js"></script>
+    <script type="module" src="../assets/js/game-detail.js"></script>
+</body>
+
+</html>
